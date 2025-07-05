@@ -2,6 +2,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InputWidget extends StatelessWidget {
   const InputWidget(
@@ -29,7 +30,7 @@ class InputWidget extends StatelessWidget {
             color: Colors.grey.withOpacity(0.2),
             spreadRadius: 5,
             blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
+            offset: const Offset(0, 3), 
           ),
         ],
       ),
@@ -39,6 +40,7 @@ class InputWidget extends StatelessWidget {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,
+          hintStyle: GoogleFonts.poppins(),
           // prefixIcon: const Icon(Icons.email),
           contentPadding: const EdgeInsets.symmetric(horizontal: 20),
         ),

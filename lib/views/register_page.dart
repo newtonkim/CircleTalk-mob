@@ -3,26 +3,29 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:circle_talk_mob/views/register_page.dart';
+import 'package:circle_talk_mob/views/login_page.dart';
 import 'package:circle_talk_mob/views/widget/input_widget.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final double size = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Register'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Center(
@@ -32,12 +35,23 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Login Page',
+                'Register Page',
                 style: GoogleFonts.poppins(
                   fontSize: size * 0.05,
                   color: Colors.black,
-               
                 ),
+              ),
+              const SizedBox(height: 20),
+              InputWidget(
+                hintText: 'Name',
+                controller: _nameController,
+                obscureText: false,
+              ),
+             const SizedBox(height: 20),
+              InputWidget(
+                hintText: 'Username',
+                controller: _usernameController,
+                obscureText: false,
               ),
               const SizedBox(height: 20),
               InputWidget(
@@ -60,13 +74,11 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                 ),
                 onPressed: () {},
-
                 child: Text(
-                  'Login',
+                  'Register',
                   style: GoogleFonts.poppins(
                     fontSize: size * 0.04,
                     color: Colors.white,
-                    
                   ),
                 ),
               ),
@@ -75,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Don\'t have an account? ',
+                    'Already have an account? ',
                     style: GoogleFonts.poppins(
                       fontSize: size * 0.03,
                       color: Colors.black,
@@ -84,15 +96,14 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(width: 5),
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => const RegisterPage());
+                      Get.to(() => const LoginPage());
                     },
                     child: Text(
-                      'Register',
+                      'Login',
                       style: GoogleFonts.poppins(
                         fontSize: size * 0.03,
                         color: Colors.blue,
-                     
-                      ),
+                      ),                      
                     ),
                   ),
                 ],
