@@ -1,103 +1,83 @@
-// ignore_for_file: deprecated_member_use
+// File: views/login_page.dart
 
+import 'register_page.dart';
 import 'package:get/get.dart';
+import 'verification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:circle_talk_mob/views/register_page.dart';
-import 'package:circle_talk_mob/views/widget/input_widget.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
-    final double size = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Login Page',
-                style: GoogleFonts.poppins(
-                  fontSize: size * 0.05,
-                  color: Colors.black,
-               
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 60),
+                Center(
+                  child: Image.asset('assets/images/login_illustration.png', height: 160),
                 ),
-              ),
-              const SizedBox(height: 20),
-              InputWidget(
-                hintText: 'Email',
-                controller: _emailController,
-                obscureText: false,
-              ),
-              SizedBox(height: 20),
-              InputWidget(
-                hintText: 'Password',
-                controller: _passwordController,
-                obscureText: true,
-              ),
-              const SizedBox(height: 30),
-
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  elevation: 0,
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                ),
-                onPressed: () {},
-
-                child: Text(
-                  'Login',
-                  style: GoogleFonts.poppins(
-                    fontSize: size * 0.04,
-                    color: Colors.white,
-                    
+                const SizedBox(height: 30),
+                Text("Welcome back!", style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                Text("Let's login for explore continues", style: GoogleFonts.poppins(color: Colors.grey)),
+                const SizedBox(height: 30),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Enter your email',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    prefixIcon: const Icon(Icons.email_outlined),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Don\'t have an account? ',
-                    style: GoogleFonts.poppins(
-                      fontSize: size * 0.03,
-                      color: Colors.black,
-                    ),
+                const SizedBox(height: 16),
+                TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    suffixText: 'Forgot password?',
                   ),
-                  SizedBox(width: 5),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(() => const RegisterPage());
-                    },
-                    child: Text(
-                      'Register',
-                      style: GoogleFonts.poppins(
-                        fontSize: size * 0.03,
-                        color: Colors.blue,
-                     
-                      ),
-                    ),
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                  onPressed: () => Get.to(() => const VerificationPage()),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(size.width, 50),
+                    backgroundColor: const Color(0xFF164863),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                ],
-              ),
-            ],
+                  child: const Text("Sign In", style: TextStyle(color: Colors.white)),
+                ),
+                const SizedBox(height: 20),
+                Center(
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: Image.asset("assets/images/google_logo.png", height: 20),
+                    label: const Text("Sign Up with Google"),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don’t have an account? "),
+                    GestureDetector(
+                      onTap: () => Get.to(() => const RegisterPage()),
+                      child: const Text("Sign Up here", style: TextStyle(color: Colors.blue)),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 30),
+              ],
+            ),
           ),
         ),
       ),
