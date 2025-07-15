@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'verification_page.dart';
 import 'package:flutter/material.dart';
@@ -21,17 +20,31 @@ class LoginPage extends StatelessWidget {
               children: [
                 const SizedBox(height: 60),
                 Center(
-                  child: Image.asset('assets/images/login_illustration_green.png', height: 260),
+                  child: Image.asset(
+                    'assets/images/login_illustration_green.png',
+                    height: 260,
+                  ),
                 ),
                 const SizedBox(height: 30),
-                Text("Welcome back!", style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.bold)),
+                Text(
+                  "Welcome back!",
+                  style: GoogleFonts.poppins(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 8),
-                Text("Let's login for explore continues", style: GoogleFonts.poppins(color: Colors.grey)),
+                Text(
+                  "Let's login for explore continues",
+                  style: GoogleFonts.poppins(color: Colors.grey),
+                ),
                 const SizedBox(height: 30),
                 TextField(
                   decoration: InputDecoration(
                     hintText: 'Enter your email',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     prefixIcon: const Icon(Icons.email_outlined),
                   ),
                 ),
@@ -40,27 +53,59 @@ class LoginPage extends StatelessWidget {
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Password',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     prefixIcon: const Icon(Icons.lock_outline),
                     suffixText: 'Forgot password?',
                   ),
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () => Get.to(() => const VerificationPage()),
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(size.width, 50),
                     backgroundColor: const Color(0xFF164863),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
-                  child: const Text("Sign In", style: TextStyle(color: Colors.white)),
+                  child: const Text(
+                    "Sign In",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
                 const SizedBox(height: 20),
                 Center(
-                  child: OutlinedButton.icon(
-                    onPressed: () {},
-                    icon: Image.asset("assets/images/google_logo.png", height: 20),
-                    label: const Text("Sign Up with Google"),
+                  child: SizedBox(
+                    width: size.width * 0.9,
+                    child: OutlinedButton.icon(
+                      onPressed: () => Get.to(() => const VerificationPage()),
+                      icon: Image.asset(
+                        "assets/images/google_logo.png",
+                        height: 20,
+                      ),
+                      label: Text(
+                        "Sign Up with Google",
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: const Color(0xFF164863),
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        side: BorderSide(color: Colors.grey.shade300),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 24,
+                        ),
+                        minimumSize: Size(size.width * 0.85, 50),
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -70,8 +115,11 @@ class LoginPage extends StatelessWidget {
                     const Text("Don’t have an account? "),
                     GestureDetector(
                       onTap: () => Get.to(() => const SignUpPage()),
-                      child: const Text("Sign Up here", style: TextStyle(color: Colors.blue)),
-                    )
+                      child: const Text(
+                        "Sign Up here",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 30),

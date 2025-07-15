@@ -1,9 +1,10 @@
 // ignore_for_file: deprecated_member_use
+import 'package:circle_talk_mob/views/verification_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_talk_mob/views/login_page.dart';
 import 'package:circle_talk_mob/views/widget/input_widget.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -85,7 +86,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: _emailController,
                       obscureText: false,
                       prefixIcon: Icons.email,
-                      
                     ),
                     const SizedBox(height: 16),
                     // Password Field
@@ -95,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       obscureText: true,
                       prefixIcon: Icons.lock,
                     ),
-                     const SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     // Sign Up Button
                     ElevatedButton(
                       onPressed: () {
@@ -114,6 +114,40 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
+                    Center(
+                      child: SizedBox(
+                        width: size.width * 0.9,
+                        child: OutlinedButton.icon(
+                          onPressed: () =>
+                              Get.to(() => const VerificationPage()),
+                          icon: Image.asset(
+                            "assets/images/google_logo.png",
+                            height: 20,
+                          ),
+                             label: Text(
+                        "Sign Up with Google",
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: const Color(0xFF164863),
+                        ),
+                      ),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            side: BorderSide(color: Colors.grey.shade300),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 24,
+                            ),
+                            minimumSize: Size(size.width * 0.85, 50),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     // Login Link
                     Center(
                       child: GestureDetector(
