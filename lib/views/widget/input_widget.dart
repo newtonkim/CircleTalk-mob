@@ -10,13 +10,15 @@ class InputWidget extends StatelessWidget {
         super.key, 
         required this.hintText, 
         required this.controller, 
-        required this.obscureText
+        required this.obscureText,
+        required this.prefixIcon,
       }
   );
 
   final String hintText;
-  final TextEditingController controller;
   final bool obscureText;
+  final IconData? prefixIcon;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +37,21 @@ class InputWidget extends StatelessWidget {
         ],
       ),
       child: TextField(
-        obscureText: obscureText,
-        controller: controller,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: hintText,
-          hintStyle: GoogleFonts.poppins(),
-          // prefixIcon: const Icon(Icons.email),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+      controller: controller,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: GoogleFonts.poppins(),
+        prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Theme.of(context).primaryColor),
         ),
       ),
-
-    
+    ),
     );
   }
 }

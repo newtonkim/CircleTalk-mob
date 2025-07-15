@@ -1,10 +1,9 @@
-// File: views/login_page.dart
 
-import 'register_page.dart';
 import 'package:get/get.dart';
 import 'verification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:circle_talk_mob/views/widget/sign_up_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -22,7 +21,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 const SizedBox(height: 60),
                 Center(
-                  child: Image.asset('assets/images/login_illustration.png', height: 160),
+                  child: Image.asset('assets/images/login_illustration_green.png', height: 260),
                 ),
                 const SizedBox(height: 30),
                 Text("Welcome back!", style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.bold)),
@@ -70,7 +69,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     const Text("Don’t have an account? "),
                     GestureDetector(
-                      onTap: () => Get.to(() => const RegisterPage()),
+                      onTap: () => Get.to(() => const SignUpPage()),
                       child: const Text("Sign Up here", style: TextStyle(color: Colors.blue)),
                     )
                   ],
