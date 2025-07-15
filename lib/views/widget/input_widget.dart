@@ -5,22 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InputWidget extends StatelessWidget {
-  final String? Function(String?)? validator;
-  const InputWidget(
-      {
-        super.key, 
-        required this.hintText, 
-        required this.controller, 
-        required this.obscureText,
-        required this.prefixIcon,
-        this.validator
-      }
-  );
-
   final String hintText;
-  final bool obscureText;
-  final IconData? prefixIcon;
   final TextEditingController controller;
+  final bool obscureText;
+  final IconData prefixIcon;
+  final String? Function(String?)? validator;
+
+  const InputWidget({
+    super.key,
+    required this.hintText,
+    required this.controller,
+    required this.obscureText,
+    required this.prefixIcon,
+    this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,7 @@ class InputWidget extends StatelessWidget {
       child: TextFormField(
       controller: controller,
       obscureText: obscureText,
-      validator: validator,
+     
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: GoogleFonts.poppins(),
@@ -54,6 +52,7 @@ class InputWidget extends StatelessWidget {
           borderSide: BorderSide(color: Theme.of(context).primaryColor),
         ),
       ),
+       validator: validator,
     ),
     );
   }
