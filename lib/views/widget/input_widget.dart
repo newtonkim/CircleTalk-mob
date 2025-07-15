@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InputWidget extends StatelessWidget {
+  final String? Function(String?)? validator;
   const InputWidget(
       {
         super.key, 
@@ -12,6 +13,7 @@ class InputWidget extends StatelessWidget {
         required this.controller, 
         required this.obscureText,
         required this.prefixIcon,
+        this.validator
       }
   );
 
@@ -36,9 +38,10 @@ class InputWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
       controller: controller,
       obscureText: obscureText,
+      validator: validator,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: GoogleFonts.poppins(),

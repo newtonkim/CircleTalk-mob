@@ -17,9 +17,23 @@ class VerificationPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 60),
-              Text("Verification", style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.bold)),
+              Text(
+                "Verification", 
+                style: GoogleFonts.poppins
+                (
+                  fontSize: 24, 
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black
+                ),
+                ),
               const SizedBox(height: 16),
-              Text("Enter your Verification Code", style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey)),
+              Text(
+                "Enter your Verification Code", 
+                  style: GoogleFonts.poppins(
+                    fontSize: 16, 
+                    color: const Color.fromARGB(255, 39, 87, 66)
+                    ),
+              ),
               const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
