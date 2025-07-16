@@ -4,8 +4,47 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:circle_talk_mob/views/widget/sign_up_page.dart';
 
-class LoginPage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'verification_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:circle_talk_mob/views/widget/sign_up_page.dart';
+
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void signIn() {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Please enter both email and password',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
+    // TODO: Implement actual sign-in logic here
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +79,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     hintText: 'Enter your email',
                     border: OutlineInputBorder(
@@ -50,6 +90,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 TextField(
+                  controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: 'Password',
@@ -62,7 +103,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: signIn,
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(size.width, 50),
                     backgroundColor: const Color(0xFF164863),

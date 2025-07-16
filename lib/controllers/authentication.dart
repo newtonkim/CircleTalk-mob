@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:circle_talk_mob/constants/constants.dart';
@@ -37,7 +38,11 @@ class AuthenticationController extends GetxController {
       
       } else {
         isLoading.value = false;
-        print(json.decode(response.body));
+        Get.snackbar('Error', 'Registration failed: ${json.decode(response.body)}',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Color(0xFFD91512),
+            colorText: Color(0xFFFFFFFF));
+        // print(json.decode(response.body));
       }
     } catch (e) {
       print(e.toString());
