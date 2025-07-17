@@ -3,12 +3,9 @@ import 'verification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:circle_talk_mob/views/widget/sign_up_page.dart';
+import 'package:circle_talk_mob/controllers/authentication.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'verification_page.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:circle_talk_mob/views/widget/sign_up_page.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -123,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                           ? const CircularProgressIndicator(
                               color: Colors.white,
                             )
-                          : const Text(
+                          :Text(
                               "Sign In",
                               style: GoogleFonts.poppins(
                                 fontSize: 16,

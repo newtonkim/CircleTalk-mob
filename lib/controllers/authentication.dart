@@ -76,7 +76,7 @@ class AuthenticationController extends GetxController {
       
       } else {
         isLoading.value = false;
-        Get.snackbar('Error', 'Login failed: ${json.decode(response.body)}',
+        Get.snackbar('Error', 'Login failed: ${json.decode(response.body)['message']}',
             snackPosition: SnackPosition.TOP,
             backgroundColor: Color(0xFFD91512),
             colorText: Color(0xFFFFFFFF));

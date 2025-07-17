@@ -154,27 +154,27 @@ class _SignUpPageState extends State<SignUpPage> {
                               backgroundColor: const Color(0xFF164863),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                             ),
-onPressed: () async {
-  if (_formKey.currentState!.validate()) {
-    await _authenticationController.register(
-      name: _nameController.text.trim(),
-      username: _usernameController.text.trim(),
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-      confirmPassword: _confirmPasswordController.text.trim(),
-    );
-  } else {
-    Get.snackbar(
-      'Error',
-      'Please fill all fields correctly',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.red,
-      colorText: Colors.white,
-    );
-  }
-},
- child: const Text("Sign Up", style: TextStyle(color: Colors.white)),
-                          );
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              await _authenticationController.register(
+                                name: _nameController.text.trim(),
+                                username: _usernameController.text.trim(),
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text.trim(),
+                                confirmPassword: _confirmPasswordController.text.trim(),
+                              );
+                            } else {
+                              Get.snackbar(
+                                'Error',
+                                'Please fill all fields correctly',
+                                snackPosition: SnackPosition.TOP,
+                                backgroundColor: Colors.red,
+                                colorText: Colors.white,
+                              );
+                            }
+                          },
+                          child: const Text("Sign Up", style: TextStyle(color: Colors.white)),
+                      );
                   }),
                       const SizedBox(height: 20),
                       Center(
