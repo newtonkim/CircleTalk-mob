@@ -52,4 +52,41 @@ class AuthenticationController extends GetxController {
     }
   }
 
+
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    isLoading.value = true;
+    try {
+      var data = {
+        'email': email,
+        'password': password,
+      };
+
+      var response = await http.post(
+        Uri.parse(url + 'login'),
+        headers: {'Accept': 'application/json'},
+        body: data,
+      );
+
+      if (response.statusCode == 200) {
+        isLoading.value = false;
+        print(json.decode(response.body));
+      
+      } else {
+        isLoading.value = false;
+        Get.snackbar('Error', 'Login failed: ${json.decode(response.body)}',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Color(0xFFD91512),
+            colorText: Color(0xFFFFFFFF));
+      }
+    } catch (e) {
+      print(e.toString());
+      rethrow;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
 }

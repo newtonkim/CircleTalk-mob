@@ -20,6 +20,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final AuthenticationController authController = Get.put(AuthenticationController());
 
   @override
   void dispose() {
@@ -28,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void signIn() {
+  void signIn() async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
@@ -44,6 +45,11 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     // TODO: Implement actual sign-in logic here
+
+    await authController.login(
+      email: email,
+      password: password,
+    );
   }
 
   @override
@@ -111,9 +117,21 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text(
-                    "Sign In",
-                    style: TextStyle(color: Colors.white),
+                 child: Obx(
+                    () {
+                      return authController.isLoading.value
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              "Sign In",
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            );
+                    },
                   ),
                 ),
                 const SizedBox(height: 20),
