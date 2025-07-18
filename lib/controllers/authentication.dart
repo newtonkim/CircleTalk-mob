@@ -1,12 +1,11 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:circle_talk_mob/views/home.dart';
 import 'package:circle_talk_mob/constants/constants.dart';
-import 'package:circle_talk_mob/views/widget/sign_up_page.dart';
 
 class AuthenticationController extends GetxController {
   var isLoading = false.obs;
@@ -31,7 +30,7 @@ class AuthenticationController extends GetxController {
       };
 
       var response = await http.post(
-        Uri.parse(url + 'register'),
+        Uri.parse('${url}register'),
         headers: {'Accept': 'application/json'},
         body: data,
       );
@@ -49,7 +48,9 @@ class AuthenticationController extends GetxController {
             colorText: Color(0xFFFFFFFF));
       }
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
       rethrow;
     } finally {
       isLoading.value = false;
@@ -69,7 +70,7 @@ class AuthenticationController extends GetxController {
       };
 
       var response = await http.post(
-        Uri.parse(url + 'login'),
+        Uri.parse('${url}login'),
         headers: {'Accept': 'application/json'},
         body: data,
       );
@@ -87,7 +88,9 @@ class AuthenticationController extends GetxController {
             colorText: Color(0xFFFFFFFF));
       }
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
       rethrow;
     } finally {
       isLoading.value = false;

@@ -1,4 +1,6 @@
+import 'package:circle_talk_mob/views/home.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'views/login_page.dart';
   import 'package:flutter/material.dart';
 
@@ -12,6 +14,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storage = GetStorage();
+    final token = storage.read('token');
+    
     return GetMaterialApp(
       title: 'Circle Talk',
       debugShowCheckedModeBanner: false,
@@ -21,7 +26,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
 
       ),
-      home: const LoginPage(),
+      home: 
+      token == null ? const LoginPage() : const HomePage(),
     );
   }
 

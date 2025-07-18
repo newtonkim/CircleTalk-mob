@@ -1,6 +1,7 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:circle_talk_mob/views/widget/post_widget.dart';
+import 'package:circle_talk_mob/controllers/post_controller.dart';
 import 'package:circle_talk_mob/views/widget/posted_data_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,7 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController _postController = TextEditingController();
+  final PostController _postController = Get.put(PostController());
+  final TextEditingController _textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,28 +38,38 @@ class _HomePageState extends State<HomePage> {
             children: [
               PostWidget(
                 hintText: 'What\'s on your mind?',
-                controller: _postController,
+                controller: _textController,
               ),
-          
+                SizedBox(height: 5),
+
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xB316BFC4),
                   elevation: 0,
                 ),
-                onPressed: () {
-          
-                }, 
-                label: const Text('Post'), 
+                onPressed: () {},
+                label: const Text('Post'),
                 icon: const Icon(Icons.send),
               ),
               SizedBox(height: 10),
               // Text('Posts');
-             PostedData(),
-              SizedBox(height: 10),
-             PostedData(),
-              SizedBox(height: 10),
-             PostedData(),
-             SizedBox(height: 10),
+              Obx(() {
+                return _postController.isLoading.value
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _postController.posts.value.length,
+                        itemBuilder: (context, index) {
+                          return PostedData(
+                            post: _postController.posts.value[index]
+                          );
+                        },
+                      );
+              },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
@@ -65,6 +77,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-

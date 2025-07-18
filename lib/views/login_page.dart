@@ -41,8 +41,6 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    // TODO: Implement actual sign-in logic here
-
     await authController.login(
       email: email,
       password: password,

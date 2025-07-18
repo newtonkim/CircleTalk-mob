@@ -8,7 +8,7 @@ class InputWidget extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final bool obscureText;
-  final IconData prefixIcon;
+  final IconData? prefixIcon;
   final String? Function(String?)? validator;
 
   const InputWidget({
