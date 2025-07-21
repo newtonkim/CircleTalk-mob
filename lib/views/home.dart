@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PostController _postController = Get.put(PostController());
   final TextEditingController _textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,20 +41,29 @@ class _HomePageState extends State<HomePage> {
                 hintText: 'What\'s on your mind?',
                 controller: _textController,
               ),
-                SizedBox(height: 5),
-
+              const SizedBox(height: 5),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xB316BFC4),
                   elevation: 0,
                 ),
-                onPressed: () {},
-                label: const Text('Post'),
+                onPressed: () async {
+                  await _postController.createPost(
+                    content: _textController.text.trim(),
+                  );
+                  _textController.clear();
+                  _postController.getAllPosts();
+                },
+                label: Obx(() {
+                  return _postController.isLoading.value
+                      ? const CircularProgressIndicator()
+                      : const Text('Post');
+                }),
                 icon: const Icon(Icons.send),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 10),
               SizedBox(
-                height: 30,
+                height: 25,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
@@ -61,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       'Posts',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -69,27 +79,31 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Obx(() {
                 return _postController.isLoading.value
                     ? const Center(child: CircularProgressIndicator())
-                    : ListView.separated(
-                        shrinkWrap: true,
-                        itemCount: _postController.posts.value.length,
-                        itemBuilder: (context, index) {
-                          return PostedData(
-                            post: _postController.posts.value[index]
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(height: 10);
-                        },
+                    : Column(
+                        children: List.generate(
+                          _postController.posts.value.length,
+                          (index) {
+                            return Column(
+                              children: [
+                                PostedData(
+                                  post: _postController.posts.value[index],
+                                ),
+                                if (index <
+                                    _postController.posts.value.length - 1)
+                                  const SizedBox(
+                                    height: 10,
+                                  ), // Add spacing between posts
+                              ],
+                            );
+                          },
+                        ),
                       );
-              },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+              }),
+              const SizedBox(height: 10),
             ],
           ),
         ),
