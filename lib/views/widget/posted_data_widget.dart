@@ -1,6 +1,8 @@
-import 'package:circle_talk_mob/models/post_model.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:circle_talk_mob/models/post_model.dart';
+import 'package:circle_talk_mob/views/post_details.dart';
 
 class PostedData extends StatelessWidget {
   const PostedData(
@@ -55,7 +57,12 @@ class PostedData extends StatelessWidget {
                 icon: Icon(Icons.thumb_up, color: Colors.green),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                    Get.to(() => PostDetails(
+                      post: post
+                    ),
+                  );
+                },
                 icon: Icon(Icons.message, color: Colors.red),
               ),
             ],

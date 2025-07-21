@@ -7,10 +7,9 @@ class PostWidget extends StatelessWidget {
       required this.controller
     }
   );
-
+  
   final String hintText;
   final TextEditingController controller ;
-
 
   @override
   Widget build(BuildContext context) {
