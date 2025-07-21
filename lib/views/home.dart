@@ -51,18 +51,38 @@ class _HomePageState extends State<HomePage> {
                 label: const Text('Post'),
                 icon: const Icon(Icons.send),
               ),
+              SizedBox(height: 20),
+              SizedBox(
+                height: 30,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Posts',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(height: 10),
-              // Text('Posts');
               Obx(() {
                 return _postController.isLoading.value
                     ? const Center(child: CircularProgressIndicator())
-                    : ListView.builder(
+                    : ListView.separated(
                         shrinkWrap: true,
                         itemCount: _postController.posts.value.length,
                         itemBuilder: (context, index) {
                           return PostedData(
                             post: _postController.posts.value[index]
                           );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(height: 10);
                         },
                       );
               },

@@ -19,7 +19,7 @@ class PostedData extends StatelessWidget {
       width: double.infinity,
       // height: 150,
       decoration: BoxDecoration(
-        color: Color.fromARGB(179, 170, 179, 180),
+        color: Color.fromARGB(179, 228, 233, 233),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -63,5 +63,6 @@ class PostedData extends StatelessWidget {
         ],
       ),
     );
+
   }
 }
