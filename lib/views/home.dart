@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               PostWidget(
                 hintText: 'What\'s on your mind?',
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 10),
               SizedBox(
-                height: 25,
+                height: 35,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
