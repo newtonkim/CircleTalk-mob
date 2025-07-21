@@ -5,9 +5,11 @@ import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:circle_talk_mob/models/post_model.dart';
 import 'package:circle_talk_mob/constants/constants.dart';
+import 'package:circle_talk_mob/models/comment_model.dart';
 
 class PostController extends GetxController {
   Rx<List<PostModel>> posts = Rx<List<PostModel>>([]);
+  Rx<List<CommentModel>> comments = Rx<List<CommentModel>>([]);
   final isLoading = false.obs;
   final box = GetStorage();
 

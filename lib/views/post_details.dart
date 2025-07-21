@@ -1,9 +1,10 @@
 
-import 'package:circle_talk_mob/views/widget/input_widget.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_talk_mob/models/post_model.dart';
+import 'package:circle_talk_mob/views/widget/input_widget.dart';
 import 'package:circle_talk_mob/views/widget/posted_data_widget.dart';
-
+import 'package:circle_talk_mob/controllers/comment_controller.dart';
 
 class PostDetails  extends StatefulWidget{
   const PostDetails(
@@ -22,7 +23,15 @@ class PostDetails  extends StatefulWidget{
 }
 class _PostDetailsState extends State<PostDetails>{  
   final prefixIcon = Icons.comment;
-  final _commentController = TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
+  final CommentController _commentController = Get.put(CommentController());
+
+@override
+  void initState() {
+    super.initState();
+    _commentController.getAllComments(widget.post.id!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +70,7 @@ class _PostDetailsState extends State<PostDetails>{
                 ),
               InputWidget(
                 hintText: 'Write a comment...', 
-                controller: _commentController, 
+                controller: _textEditingController, 
                 obscureText: false, 
                 prefixIcon: prefixIcon
               ),
