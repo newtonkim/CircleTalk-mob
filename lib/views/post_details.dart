@@ -67,7 +67,7 @@ class _PostDetailsState extends State<PostDetails> {
             children: [
               PostedData(post: widget.post),
               SizedBox(height: 10),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 380,
                 child: Obx(() {
@@ -125,7 +125,15 @@ class _PostDetailsState extends State<PostDetails> {
                   backgroundColor: Color(0xB316BFC4),
                   elevation: 0,
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  //Check here if bug occurs
+                 await _commentController.createComment(
+                    widget.post.id!,
+                    _textEditingController.text.trim(),
+                  );
+                  _textEditingController.clear();
+                  _commentController.getAllComments(widget.post.id!);
+                },
                 child: const Text('Comment'),
               ),
             ],

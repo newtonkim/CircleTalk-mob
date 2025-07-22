@@ -39,7 +39,7 @@ class AuthenticationController extends GetxController {
         isLoading.value = false;
         token.value = json.decode(response.body)['token'];
         box.write('token', token.value);
-        Get.offAll(() => const HomePage()); // Navigate to home page after successful registration
+        Get.offAll(() => const HomePage());
       } else {
         isLoading.value = false;
         Get.snackbar('Error', 'Registration failed: ${json.decode(response.body)}',

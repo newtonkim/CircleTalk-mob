@@ -12,10 +12,9 @@ class CommentController extends GetxController {
   final box = GetStorage();
 
   @override
+  // ignore: unnecessary_overrides
   void onInit() {
     super.onInit();
-    // TODO: Provide a valid id value here or pass it as a parameter
-    // getAllComments(id);
   }
 
     Future<void> getAllComments(id) async {
@@ -51,6 +50,47 @@ class CommentController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to fetch comments: $e',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Color(0xFFD91512),
+        colorText: Color(0xFFFFFFFF),
+      );
+    }
+  }
+
+  Future<void> createComment(id, body) async {
+    try {
+      isLoading.value = true;
+      var data = {
+          'body': body
+      };
+
+      var response = await http.post(
+        Uri.parse('${url}feed/comment/$id'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${box.read('token')}',
+        },
+        body: data,
+      );
+
+      if (response.statusCode == 201) {
+        isLoading.value = false;        
+        getAllComments(id);
+      } else {
+        isLoading.value = false;
+        Get.snackbar(
+          'Error',
+          'Failed to create comment: ${json.decode(response.body)['message']}',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Color(0xFFD91512),
+          colorText: Color(0xFFFFFFFF),
+        );
+      }
+    } catch (e) {
+      isLoading.value = false;
+      Get.snackbar(
+        'Error',
+        'Failed to create comment: $e',
         snackPosition: SnackPosition.TOP,
         backgroundColor: Color(0xFFD91512),
         colorText: Color(0xFFFFFFFF),

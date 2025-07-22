@@ -74,7 +74,7 @@ void main() {
     });
 
     testWidgets('Shows comment time in human-readable format', (WidgetTester tester) async {
-      final now = DateTime.now();
+      DateTime.now();
       final comment = mockCommentController.comments.isNotEmpty
           ? mockCommentController.comments.first
           : null;
