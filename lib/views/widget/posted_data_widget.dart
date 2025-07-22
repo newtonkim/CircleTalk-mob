@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:circle_talk_mob/models/post_model.dart';
 import 'package:circle_talk_mob/views/post_details.dart';
+import 'package:circle_talk_mob/controllers/post_controller.dart';
+import 'package:http/http.dart' as box;
 
-class PostedData extends StatelessWidget {
+class PostedData extends StatefulWidget {
   const PostedData(
     {
       super.key,
@@ -14,6 +16,14 @@ class PostedData extends StatelessWidget {
 
   final PostModel post;
 
+  @override
+  State<PostedData> createState() => _PostedDataState();
+}
+
+class _PostedDataState extends State<PostedData> {
+
+ final PostController _postController = Get.put(PostController());
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +38,7 @@ class PostedData extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-           post.user!.name!,
+           widget.post.user!.name!,
             style: GoogleFonts.poppins(
               fontSize: 13,
               fontWeight: FontWeight.w800,
@@ -36,7 +46,7 @@ class PostedData extends StatelessWidget {
           ),
           SizedBox(height: 5),
           Text(
-             post.user!.email!,
+             widget.post.user!.email!,
             style: GoogleFonts.poppins(
               fontSize: 10,
               fontWeight: FontWeight.w300,
@@ -44,7 +54,7 @@ class PostedData extends StatelessWidget {
           ),
           SizedBox(height:5),
           Text(
-           post.content!,
+           widget.post.content!,
             style: GoogleFonts.poppins(
               fontSize: 12,
               fontWeight: FontWeight.w400,
@@ -53,13 +63,17 @@ class PostedData extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.thumb_up, color: Colors.green),
+                onPressed: () async{
+                  await _postController.likeAndDislike(widget.post.id!);
+                  _postController.getAllPosts();
+                },
+                icon: Icon(Icons.thumb_up, 
+                color: widget.post.liked! ? Colors.blue[400] : Colors.black),
               ),
               IconButton(
                 onPressed: () {
                     Get.to(() => PostDetails(
-                      post: post
+                      post: widget.post
                     ),
                   );
                 },

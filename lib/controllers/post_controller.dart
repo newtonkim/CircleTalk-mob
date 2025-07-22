@@ -106,4 +106,40 @@ class PostController extends GetxController {
       );
     }
   }
+
+  Future<void> likeAndDislike(id) async {
+    isLoading.value = true;
+    try {
+      var response = await http.post(
+        Uri.parse('${url}feed/like/$id'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${box.read('token')}',
+        },
+      );  
+      var message = json.decode(response.body)['message'];
+      if (response.statusCode == 200 && (message == 'Like Post' || message == 'Unlike Post')) {
+          isLoading.value = false;
+          getAllPosts();
+        } else {
+          isLoading.value = false;
+          Get.snackbar(
+            'Error',
+            'Failed to like or dislike: $message',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Color(0xFFD91512),
+            colorText: Color(0xFFFFFFFF),
+          );
+        }
+    } catch (e) {
+      isLoading.value = false;
+        Get.snackbar(
+          'Error',
+          'Failed to like or dislike: $e',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Color(0xFFD91512),
+          colorText: Color(0xFFFFFFFF),
+        );
+    }
+  }
 }
